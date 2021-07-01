@@ -3,7 +3,8 @@ class AnimesController < ApplicationController
   
   # GET /animes or /animes.json
   def index
-    @animes = Anime.all
+    #@animes = Anime.all
+    @animes = current_user.animes
   end
 
   # GET /animes/1 or /animes/1.json
@@ -22,6 +23,7 @@ class AnimesController < ApplicationController
   # POST /animes or /animes.json
   def create
     @anime = Anime.new(anime_params)
+    @anime.user = current_user
 
     respond_to do |format|
       if @anime.save
